@@ -36,7 +36,7 @@ class DemoController extends AbstractResourceController
         
         $this->mode = self::MODE_EDIT;
         $this->recordId = 'demo';
-        $this->protectChanges = false;
+        $this->protectChanges = true;
         $this->title = 'Alxarafe Showcase Demo';
     }
 
@@ -115,6 +115,7 @@ class DemoController extends AbstractResourceController
         return [
             new Panel('Empresa Matriz', [
                 new Text('company_name', 'Nombre de la empresa'),
+                new Integer('rating', 'Nivel de Prioridad (1-10)', ['min' => 1, 'max' => 10]),
                 new Panel('Dirección Fiscal', [
                     new Text('address_street', 'Calle'),
                     new Text('address_city', 'Ciudad'),

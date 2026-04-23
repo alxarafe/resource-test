@@ -15,6 +15,19 @@ El propósito de este repositorio es ilustrar la potencia de la UI Declarativa d
 
 ## Ejecución Local
 
+### Opción 1: Usando Docker (Recomendado)
+
+Si tienes Docker y Docker Compose instalados, puedes levantar el entorno rápidamente sin instalar dependencias en tu máquina:
+
+```bash
+docker compose up -d
+docker compose exec app composer install
+```
+
+Luego abre en tu navegador: http://localhost:8000
+
+### Opción 2: Usando PHP local
+
 1. Clona el repositorio e instala dependencias:
    ```bash
    composer install

@@ -4,17 +4,17 @@ $class = get_class($component);
 $type = (new \ReflectionClass($component))->getShortName();
 
 if ($type === 'TabGroup') {
-    $tabs = $component->getTabs();
+    $tabs = $component->getFields();
     echo '<ul class="nav nav-tabs mb-4">';
     foreach ($tabs as $index => $tab) {
         $active = $index === 0 ? 'active' : '';
-        echo "<li class=\"nav-item\"><a class=\"nav-link {$active}\" data-bs-toggle=\"tab\" href=\"#tab-{$tab->getId()}\"><i class=\"{$tab->getIcon()}\"></i> {$tab->getLabel()}</a></li>";
+        echo "<li class=\"nav-item\"><a class=\"nav-link {$active}\" data-bs-toggle=\"tab\" href=\"#tab-{$tab->getTabId()}\"><i class=\"{$tab->getIcon()}\"></i> {$tab->getLabel()}</a></li>";
     }
     echo '</ul><div class="tab-content">';
     foreach ($tabs as $index => $tab) {
         $active = $index === 0 ? 'show active' : '';
-        echo "<div class=\"tab-pane fade {$active}\" id=\"tab-{$tab->getId()}\">";
-        foreach ($tab->getChildren() as $child) {
+        echo "<div class=\"tab-pane fade {$active}\" id=\"tab-{$tab->getTabId()}\">";
+        foreach ($tab->getFields() as $child) {
             echo $this->render('render_component', ['component' => $child]);
         }
         echo "</div>";
@@ -24,24 +24,26 @@ if ($type === 'TabGroup') {
 } elseif ($type === 'Panel') {
     $options = $component->getOptions();
     $classNames = $options['class'] ?? '';
+    $colClass = $component->getColClass();
+    echo "<div class=\"{$colClass}\">";
     echo "<div class=\"card mb-4 {$classNames}\"><div class=\"card-header\">{$component->getLabel()}</div><div class=\"card-body\"><div class=\"row\">";
-    foreach ($component->getChildren() as $child) {
+    foreach ($component->getFields() as $child) {
         echo $this->render('render_component', ['component' => $child]);
     }
-    echo "</div></div></div>";
+    echo "</div></div></div></div>";
 
 } elseif ($type === 'Row') {
     echo "<div class=\"row mb-3\">";
-    foreach ($component->getChildren() as $child) {
+    foreach ($component->getFields() as $child) {
         echo $this->render('render_component', ['component' => $child]);
     }
     echo "</div>";
 
-} elseif ($component instanceof \Alxarafe\ResourceController\Component\Fields\AbstractField) {
+} elseif ($component instanceof \Alxarafe\ResourceController\Component\AbstractField) {
     $options = $component->getOptions();
     $col = $options['col'] ?? 'col-md-12';
     $label = $component->getLabel();
-    $name = $component->getName();
+    $name = $component->getField();
     $required = !empty($options['required']) ? ' <span class="text-danger">*</span>' : '';
     
     echo "<div class=\"{$col} mb-3\">";
@@ -57,7 +59,8 @@ if ($type === 'TabGroup') {
             echo "<textarea class=\"form-control\" id=\"field_{$name}\" rows=\"" . ($options['rows'] ?? 3) . "\"></textarea>";
         } elseif ($type === 'Select') {
             echo "<select class=\"form-select\" id=\"field_{$name}\">";
-            foreach ($options['options'] ?? [] as $k => $v) {
+            $choices = $options['options']['values'] ?? $options['values'] ?? [];
+            foreach ($choices as $k => $v) {
                 echo "<option value=\"{$k}\">{$v}</option>";
             }
             echo "</select>";
