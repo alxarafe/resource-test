@@ -1,5 +1,7 @@
 # alxarafe/resource-test
 
+![Alxarafe Showcase UI](assets/showcase.png)
+
 Este es un proyecto de demostración y pruebas (Showcase) para el ecosistema **Alxarafe Resource Controller**.
 
 El propósito de este repositorio es ilustrar la potencia de la UI Declarativa de Alxarafe. Demuestra cómo, utilizando una arquitectura agnóstica sin Laravel ni Vue.js, se pueden construir formularios complejos y paneles anidados en muy pocas líneas de código.
