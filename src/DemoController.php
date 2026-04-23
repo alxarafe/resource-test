@@ -28,6 +28,7 @@ use Alxarafe\ResourcePdo\PdoTransaction;
 class DemoController extends AbstractResourceController
 {
     private \PDO $pdo;
+    public string $title;
 
     public function __construct(\PDO $pdo)
     {
@@ -37,6 +38,21 @@ class DemoController extends AbstractResourceController
         $this->recordId = 'demo';
         $this->protectChanges = false;
         $this->title = 'Alxarafe Showcase Demo';
+    }
+
+    public static function getModuleName(): string
+    {
+        return 'Showcase';
+    }
+
+    public static function getControllerName(): string
+    {
+        return 'Demo';
+    }
+
+    public static function url(string $action = 'index', array $params = []): string
+    {
+        return '?module=Showcase&controller=Demo';
     }
 
     #[\Override]
