@@ -1,0 +1,75 @@
+<?php
+// Extracción de metadatos del componente
+$class = get_class($component);
+$type = (new \ReflectionClass($component))->getShortName();
+
+if ($type === 'TabGroup') {
+    $tabs = $component->getTabs();
+    echo '<ul class="nav nav-tabs mb-4">';
+    foreach ($tabs as $index => $tab) {
+        $active = $index === 0 ? 'active' : '';
+        echo "<li class=\"nav-item\"><a class=\"nav-link {$active}\" data-bs-toggle=\"tab\" href=\"#tab-{$tab->getId()}\"><i class=\"{$tab->getIcon()}\"></i> {$tab->getLabel()}</a></li>";
+    }
+    echo '</ul><div class="tab-content">';
+    foreach ($tabs as $index => $tab) {
+        $active = $index === 0 ? 'show active' : '';
+        echo "<div class=\"tab-pane fade {$active}\" id=\"tab-{$tab->getId()}\">";
+        foreach ($tab->getChildren() as $child) {
+            echo $this->render('render_component', ['component' => $child]);
+        }
+        echo "</div>";
+    }
+    echo '</div>';
+
+} elseif ($type === 'Panel') {
+    $options = $component->getOptions();
+    $classNames = $options['class'] ?? '';
+    echo "<div class=\"card mb-4 {$classNames}\"><div class=\"card-header\">{$component->getLabel()}</div><div class=\"card-body\"><div class=\"row\">";
+    foreach ($component->getChildren() as $child) {
+        echo $this->render('render_component', ['component' => $child]);
+    }
+    echo "</div></div></div>";
+
+} elseif ($type === 'Row') {
+    echo "<div class=\"row mb-3\">";
+    foreach ($component->getChildren() as $child) {
+        echo $this->render('render_component', ['component' => $child]);
+    }
+    echo "</div>";
+
+} elseif ($component instanceof \Alxarafe\ResourceController\Component\Fields\AbstractField) {
+    $options = $component->getOptions();
+    $col = $options['col'] ?? 'col-md-12';
+    $label = $component->getLabel();
+    $name = $component->getName();
+    $required = !empty($options['required']) ? ' <span class="text-danger">*</span>' : '';
+    
+    echo "<div class=\"{$col} mb-3\">";
+    if ($type === 'Boolean') {
+        echo "<div class=\"form-check mt-4\">";
+        echo "<input class=\"form-check-input\" type=\"checkbox\" id=\"field_{$name}\">";
+        echo "<label class=\"form-check-label fw-bold\" for=\"field_{$name}\">{$label}{$required}</label>";
+        echo "</div>";
+    } else {
+        echo "<label class=\"form-label fw-bold small text-muted\" for=\"field_{$name}\">{$label}{$required}</label>";
+        
+        if ($type === 'Textarea') {
+            echo "<textarea class=\"form-control\" id=\"field_{$name}\" rows=\"" . ($options['rows'] ?? 3) . "\"></textarea>";
+        } elseif ($type === 'Select') {
+            echo "<select class=\"form-select\" id=\"field_{$name}\">";
+            foreach ($options['options'] ?? [] as $k => $v) {
+                echo "<option value=\"{$k}\">{$v}</option>";
+            }
+            echo "</select>";
+        } else {
+            $inputType = 'text';
+            if ($type === 'Date') $inputType = 'date';
+            if ($type === 'Time') $inputType = 'time';
+            if ($type === 'DateTime') $inputType = 'datetime-local';
+            if ($type === 'Integer' || $type === 'Decimal') $inputType = 'number';
+            
+            echo "<input class=\"form-control\" type=\"{$inputType}\" id=\"field_{$name}\">";
+        }
+    }
+    echo "</div>";
+}
