@@ -4,6 +4,8 @@
 ![Tests](https://github.com/alxarafe/resource-test/actions/workflows/tests.yml/badge.svg)
 ![License](https://img.shields.io/badge/license-GPL--3.0--or--later-blue?style=flat-square)
 
+[Read in English 🇺🇸](README.md)
+
 ![Alxarafe Showcase UI](assets/showcase.png)
 
 Este es un proyecto de demostración y pruebas (Showcase) para el ecosistema **Alxarafe Resource Controller**.
