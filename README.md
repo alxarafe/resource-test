@@ -1,5 +1,9 @@
 # alxarafe/resource-test
 
+![PHP Version](https://img.shields.io/badge/PHP-8.2+-blueviolet?style=flat-square)
+![Tests](https://github.com/alxarafe/resource-test/actions/workflows/tests.yml/badge.svg)
+![License](https://img.shields.io/badge/license-GPL--3.0--or--later-blue?style=flat-square)
+
 ![Alxarafe Showcase UI](assets/showcase.png)
 
 This is a **Showcase and Testing** project for the **Alxarafe Resource Controller** ecosystem.
@@ -21,8 +25,17 @@ If you have Docker and Docker Compose installed, you can spin up the environment
 
 ```bash
 docker compose up -d
-docker compose exec app composer install
+./bin/install.sh
 ```
+
+### Running Tests and Verification
+
+To ensure everything is working correctly, you can use the scripts in the `bin/` directory:
+
+- **Install dependencies**: `./bin/install.sh`
+- **Run tests**: `./bin/run_tests.sh`
+- **Full CI check**: `./bin/ci_local.sh`
+
 
 Then open in your browser: http://localhost:8000
 

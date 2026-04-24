@@ -1,5 +1,9 @@
 # alxarafe/resource-test
 
+![PHP Version](https://img.shields.io/badge/PHP-8.2+-blueviolet?style=flat-square)
+![Tests](https://github.com/alxarafe/resource-test/actions/workflows/tests.yml/badge.svg)
+![License](https://img.shields.io/badge/license-GPL--3.0--or--later-blue?style=flat-square)
+
 ![Alxarafe Showcase UI](assets/showcase.png)
 
 Este es un proyecto de demostración y pruebas (Showcase) para el ecosistema **Alxarafe Resource Controller**.
@@ -21,8 +25,17 @@ Si tienes Docker y Docker Compose instalados, puedes levantar el entorno rápida
 
 ```bash
 docker compose up -d
-docker compose exec app composer install
+./bin/install.sh
 ```
+
+### Ejecutar Tests y Verificación
+
+Para asegurar que todo funciona correctamente, puedes usar los scripts de la carpeta `bin/`:
+
+- **Instalar dependencias**: `./bin/install.sh`
+- **Ejecutar tests**: `./bin/run_tests.sh`
+- **Chequeo completo**: `./bin/ci_local.sh`
+
 
 Luego abre en tu navegador: http://localhost:8000
 
