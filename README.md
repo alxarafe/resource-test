@@ -2,53 +2,50 @@
 
 ![Alxarafe Showcase UI](assets/showcase.png)
 
-Este es un proyecto de demostración y pruebas (Showcase) para el ecosistema **Alxarafe Resource Controller**.
+This is a **Showcase and Testing** project for the **Alxarafe Resource Controller** ecosystem.
 
-El propósito de este repositorio es ilustrar la potencia de la UI Declarativa de Alxarafe. Demuestra cómo, utilizando una arquitectura agnóstica sin Laravel ni Vue.js, se pueden construir formularios complejos y paneles anidados en muy pocas líneas de código.
+The purpose of this repository is to illustrate the power of Alxarafe's Declarative UI. It demonstrates how, using an agnostic architecture without Laravel or Vue.js, you can build complex forms and nested panels in just a few lines of code.
 
-## Características
+## Features
 
-- 🏗️ **UI Declarativa**: Toda la estructura de pestañas, paneles y campos se define en PHP puro mediante metadatos (Array/Objetos).
-- ⚡ **HTML Puro**: Utiliza `alxarafe/resource-html` como adaptador de `RendererContract` para generar HTML sin motores de plantillas pesados.
-- 💾 **Native PDO**: Integra `alxarafe/resource-pdo` para demostrar cómo un `RepositoryContract` puede funcionar con una base de datos SQLite en memoria, sin Eloquent.
-- 🚀 **Cero Dependencias Framework**: Sin Laravel, sin Symfony, sin dependencias externas innecesarias.
+- 🏗️ **Declarative UI**: The entire structure of tabs, panels, and fields is defined in pure PHP using metadata (Arrays/Objects).
+- ⚡ **Built-in HTML**: Uses the consolidated `DefaultRenderer` from `resource-controller` to generate the UI without heavy template engines.
+- 💾 **Native PDO**: Integrates `alxarafe/resource-pdo` to demonstrate how a `RepositoryContract` can work with any database (e.g., SQLite in-memory) without an ORM.
+- 🚀 **Zero Framework Dependencies**: No Laravel, no Symfony, no unnecessary external weight.
 
-## Ejecución Local
+## Local Execution
 
-### Opción 1: Usando Docker (Recomendado)
+### Option 1: Using Docker (Recommended)
 
-Si tienes Docker y Docker Compose instalados, puedes levantar el entorno rápidamente sin instalar dependencias en tu máquina:
+If you have Docker and Docker Compose installed, you can spin up the environment quickly:
 
 ```bash
 docker compose up -d
 docker compose exec app composer install
 ```
 
-Luego abre en tu navegador: http://localhost:8000
+Then open in your browser: http://localhost:8000
 
-### Opción 2: Usando PHP local
+### Option 2: Using Local PHP
 
-1. Clona el repositorio e instala dependencias:
+1. Clone the repository and install dependencies:
    ```bash
    composer install
    ```
 
-2. Arranca el servidor web integrado de PHP:
+2. Start the built-in PHP web server:
    ```bash
    php -S localhost:8000 -t public
    ```
 
-3. Abre en tu navegador: http://localhost:8000
+3. Open in your browser: http://localhost:8000
 
-Verás la vista compleja generada dinámicamente a través de un único array de configuración devuelto por `DemoController`.
+You will see the complex view dynamically generated through a single configuration array returned by `DemoController`.
 
-## Ecosistema Alxarafe
+## Alxarafe Ecosystem
 
-| Paquete | Propósito | Estado |
+| Package | Purpose | Status |
 |---|---|---|
-| **[resource-controller](https://github.com/alxarafe/resource-controller)** | Motor CRUD central + componentes UI | ✅ Estable |
-| **[resource-eloquent](https://github.com/alxarafe/resource-eloquent)** | Adaptador ORM Eloquent | ✅ Estable |
-| **[resource-pdo](https://github.com/alxarafe/resource-pdo)** | Adaptador nativo PDO | ✅ Estable |
-| **[resource-blade](https://github.com/alxarafe/resource-blade)** | Adaptador de renderizado con Blade | ✅ Estable |
-| **[resource-twig](https://github.com/alxarafe/resource-twig)** | Adaptador de renderizado con Twig | ✅ Estable |
-| **[resource-html](https://github.com/alxarafe/resource-html)** | Adaptador de renderizado con plantillas PHP/HTML | ✅ Estable |
+| **[resource-controller](https://github.com/alxarafe/resource-controller)** | Central CRUD engine + UI components | ✅ Stable |
+| **[resource-pdo](https://github.com/alxarafe/resource-pdo)** | Native PDO adapter | ✅ Stable |
+| **[resource-eloquent](https://github.com/alxarafe/resource-eloquent)** | Eloquent ORM adapter | ✅ Stable |
